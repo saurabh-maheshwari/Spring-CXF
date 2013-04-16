@@ -5,7 +5,7 @@ Requirements:
 2. Maven 3.0.x
 
 Build:
-Project can be build by 
+Project can be built by 
 	'mvn clean install' or 'mvn clean install -DskipTests=true' (not project specific)
 
 Deploy:

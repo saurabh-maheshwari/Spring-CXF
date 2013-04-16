@@ -45,24 +45,20 @@ public class LoggingAspect {
 	public Object profiler(ProceedingJoinPoint pjp) throws Throwable {
 
 		long start = System.nanoTime();
-		String classMethodName = pjp.getTarget().getClass().getSimpleName()
-				+ "." + pjp.getSignature().getName();
-		log.info(classMethodName + " - called with param(s) "
-				+ ToStringBuilder.reflectionToString(pjp.getArgs()));
+		String classMethodName = pjp.getTarget().getClass().getSimpleName() + "." + pjp.getSignature().getName();
+		log.info(classMethodName + " - called with param(s) " + ToStringBuilder.reflectionToString(pjp.getArgs()));
 
 		Object returnValue = null;
 		try {
 			returnValue = pjp.proceed();
 		} catch (Exception exception) {
-			log.error(ToStringBuilder.reflectionToString(ExceptionUtils
-					.getRootCause(exception)));
+			log.error(ToStringBuilder.reflectionToString(ExceptionUtils.getRootCause(exception)));
 			log.error(ExceptionUtils.getStackTrace(exception));
 			throw exception;
 		}
 
 		long end = System.nanoTime();
-		log.info(classMethodName + " - finished. Took " + (end - start)
-				+ " milliseconds. ");
+		log.info(classMethodName + " - finished. Took " + (end - start) + " milliseconds. ");
 
 		return returnValue;
 	}
